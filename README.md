@@ -23,4 +23,4 @@ Implementați un convertor pentru următoarele unități de măsură:
 Sugestie: folosiți diferitele unități de măsură, după cum le puteți găsi de exemplu la
 http://www.convertorunitati.com/
 
-*Let's assume more specs were given*
+
