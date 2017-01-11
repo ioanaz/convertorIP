@@ -17,18 +17,19 @@
 using namespace std;
 
 void displayMainMenu();
+void displayAreaOptions();
+void displayTemperatureOptions();
+void convertTemperature(int from, int to);
 int answer;
 
-int main()
-{
+int main() {
     cout << "Welcome to Convertor V1 @1992 Style: " << endl;
     displayMainMenu();
    
     
 }
 
-void displayMainMenu()
-{
+void displayMainMenu() {
     int answer;
     
     cout << "Step1: Choose what measurements units you want to convert from the below list: " << endl;
@@ -54,6 +55,7 @@ void displayMainMenu()
                 break;
             case 2:
                 cout << "2.Area\n";
+                displayAreaOptions();
                 break;
             case 3:
                 cout << "3.Volume\n";
@@ -66,6 +68,7 @@ void displayMainMenu()
                 break;
             case 6:
                 cout << "6. Temperature (Fahrenheit to Celsius to Kelvin)\n";
+                displayTemperatureOptions();
                 break;
             case 7:
                 cout << "7. Mass (grams to kg to lbs to stones. you name it)\n";
@@ -88,4 +91,33 @@ void displayMainMenu()
         cout << "You picked option "<< answer;
 } 
 
+void displayAreaOptions() {
+    cout<<"U so void";
+}
+void displayTemperatureOptions() {
+    int from, to;
+    cout << "6. Temperature options (in degrees):\n";
+        cout << "1. Celsius || 2. Fahrenheit|| 3. Kelvin";
+        cout<< "Enter what you are converting from and to \n ";
+        cout<< "eg: first option number represent FROM. second option number represents TO. eg: 1 3 will convert from F to K\n ";
+        cout<< "from:";
+        cin>>from;
+        cout<<"to:";
+        cin>>to;
+        convertTemperature(from, to);
+}
 
+void convertTemperature(int from, int to) {
+    double degrees;
+    cout<<"Please enter value you want to convert";
+    cin>>degrees;
+    if(from==1)
+        if(to==1)cout<<degrees<<" hey dumbass, you just converted a bunch!";
+        else 
+            if (to==2) {
+                degrees*=33.8;
+                cout<< degrees <<"F\n";
+                
+            }
+
+}
