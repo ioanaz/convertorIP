@@ -1,0 +1,42 @@
+Initial specs:
+
+3. Convertor (1 persoană) (notă maximă: 8 puncte)
+Implementați un convertor pentru următoarele unități de măsură:
+1. Lungime
+2. Arie
+3. Volum
+4. Timp
+5. Viteza (km /h in mph in m/s)
+6. Temperatură
+7. Masa
+8. Energie
+9. Presiune (bar to psi)
+10. Densitate
+11. Consum combustibil (din l/100km in mile la galon si km la litru)
+Sugestie: folosiți diferitele unități de măsură, după cum le puteți găsi de exemplu la
+http://www.convertorunitati.com/
+
+*Let's assume more specs were given*
+V1.0 of Convertor:
+Let's assume we want to be able to select for what measurement type we want to make a converstion (eg: length)
+AND we only want to do one converstion (eg: from m to inch || from km to ni)
+
+V2.0 of Convertor:
+We'll be able to convert for all the above measurement units, all types of measurement units (length.metric(mm,cm,m,km) to (length.imperial(inch,feet,mile)) as well as metric to metric, imperial to imperial
+Reconvert freshly converted value (eg: x=convert from cm to inch; x= convert same value from inch to nautical mile)
+
+Questions:
+Do we want to be able to convert and reconvert?
+eg:
+length=1km
+length.convertToMeters
+length.convertToInches
+
+*Use cases*
+As a user over Convertor, I want to be able to:
+> See what measurement units I can convert so that I give my first conversion command -> Implement Menu
+> Select what measurement unit I want to convert so that I can start converting -> HCI low level (cin>>menu nr haha)
+> Read option (eg:length)
+> Display option for length:
+> > mm, cm, m, km
+> > in, ft, yd, mi (mile), nmi (nautical mile)
