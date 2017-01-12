@@ -13,13 +13,11 @@
 
 #include <cstdlib>
 #include <iostream>
+#include "conversionBase.h"
 
 using namespace std;
 
-void displayMainMenu();
-void displayAreaOptions();
-void displayTemperatureOptions();
-void convertTemperature(int from, int to);
+static double long MassConvValues[7]={1,1000,1000000,1000000000, 453593,28349.5,14593903};
 int answer;
 
 int main() {
