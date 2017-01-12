@@ -20,7 +20,12 @@ struct toConvert{
     int convertToMeasureUnit;
 };
 
-static double long MassConvValues[7]={1,1000,1000000,1000000000, 453593,28349.5,14593903};
+void displayMainMenu();
+void displayAreaOptions();
+void displayMassOptions();
+void displayTemperatureOptions();
+void convertTemperature(int from, int to);
+
 
 #endif /* CONVERSIONBASE_H */
 

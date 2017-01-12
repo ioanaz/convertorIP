@@ -17,7 +17,7 @@
 
 using namespace std;
 
-static double long MassConvValues[7]={1,1000,1000000,1000000000, 453593,28349.5,14593903};
+static double long MassConvValues[8]={0, 1, 1000, 1000000, 1000000000, 453592, 28349.5, 14593903};
 int answer;
 
 int main() {
@@ -70,6 +70,7 @@ void displayMainMenu() {
                 break;
             case 7:
                 cout << "7. Mass (grams to kg to lbs to stones. you name it)\n";
+                displayMassOptions();
                 break;
             case 8:
                 cout << "8. Energy \n";
@@ -103,6 +104,17 @@ void displayTemperatureOptions() {
         cout<<"to:";
         cin>>to;
         convertTemperature(from, to);
+}
+
+void displayMassOptions(){
+    int from, to;
+    double mass, newMass;
+    cout<<"1. mg || 2. g || 3. kg || 4.tone || 5. lb || 6. oz || 7. slug \n";
+    cin>>from>>to;
+    cout<<"Enter value:\n";
+    cin>>mass;
+    newMass=mass*MassConvValues[from]/MassConvValues[to];
+    cout<<"You converted "<<mass<< "to "<< newMass << "\n";
 }
 
 void convertTemperature(int from, int to) {
