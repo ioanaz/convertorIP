@@ -16,6 +16,7 @@
 #include <sstream>
 #include <limits>
 #include <fstream>
+#include "string.h"
 #include "conversionBase.h"
 
 #ifndef NOLOGGING
@@ -33,17 +34,21 @@ genericUnitMetric genericUnitMetrics[11];
 string conversionOptions[11]={"Length", "Area", "Volume", "Time", "Speed", "Temperature","Mass", "Energy", "Pressure", "Density", "Fuel consumption level"};
 double conversionValues[4][11];
 string conversionUnits[3][11];
+int answer;
 
 int main() {
     cout << "Welcome to Convertor V1 @1992 Style: " << endl;
-    int shouldContinue=1;
-   /* while(shouldContinue==1){
-        shouldContinue=displayMainMenu();
-    }
-    */
+    
     loadConversionValuesInMl();
     loadConversionUnits();
     setupGenericUnitsStruct();
+    
+    int shouldContinue=1;
+    while(shouldContinue==1){
+        shouldContinue=displayMainMenu();
+    }
+    
+
     
 }
  
@@ -67,8 +72,7 @@ int displayMainMenu() {
     cout<< "12. Exit";
     
     cin>> answer;
-        switch (answer)
-        {
+        switch (answer){
             case 1:
                 cout << "1.Length options:\n";
                 cout << "1. m || 2. km || 3. mile";
@@ -79,8 +83,8 @@ int displayMainMenu() {
                 break;
             case 3:
                 cout << "3.Volume\n";
-                setupGenericUnitsStruct();
-                convertGenericUnit();
+                //setupGenericUnitsStruct();
+                convertGenericUnit(answer);
                // convertVolume();
                 break;
             case 4:
@@ -170,7 +174,6 @@ void convertVolume(){
     cout<<"Please enter value for conversion"<<endl;
     cin>>volume.userEnteredValue;
     
-    setupVolumeUnitsStruct();
     newVolume = volume.userEnteredValue *  
             volumeUnits[volume.initialMeasureUnit-1].volumeValue / 
             volumeUnits[volume.convertToMeasureUnit-1].volumeValue;
@@ -201,41 +204,38 @@ void reconvertVolume(toConvert volume){
             " to "<<newVolume<<volumeUnits[volume.convertToMeasureUnit-1].volumeUnitName<< endl;
     
 }
-/*
-void convertGeneric(genericUnitMetric newUnitMetric){
-    double newConversion;
-    if(newUnitMetric.genericUnitMetricIndex==3) {
-       cout<<"1.ml, 2.cm3, 3.cl, 4.in3, 5.dl, 6.l, 7.dm3, 8.ft3, 9.gal(us), 10.gal(uk), 11.m3" ;
-       toConvert volume;
-       cin>>volume.initialMeasureUnit>>volume.convertToMeasureUnit;
-       cin>>volume.userEnteredValue;
-       setupVolumeUnitsStruct();
-    }
    
-}
-*/
- 
-   
-void convertGenericUnit(){
-    double newVolume;
+void convertGenericUnit(int answer){
+    double newValue;
     toConvert newConversion;
-    cout<<"1.ml, 2.cm3, 3.cl, 4.in3, 5.dl, 6.l, 7.dm3, 8.ft3, 9.gal(us), 10.gal(uk), 11.m3" ;
+    //for(int i=1; i<4; i++){
+        //if(i==answer){
+            cout<< genericUnitMetrics[answer-1].genericUnitMetricIndex<<".";
+            cout<< genericUnitMetrics[answer-1].genericUnitMetricName<<endl;
+       // }s
+   // }
+            for(int j=0; j<11; j++){         
+               cout<< genericUnitMetrics[answer-1].genericUnits[j].genericUnitIndex 
+                << "."<< genericUnitMetrics[answer-1].genericUnits[j].genericUnitName<<endl;
+            }
+            
     cout<<"Please enter FROM and TO units you want to convert"<<endl;
     cin>>newConversion.initialMeasureUnit>>newConversion.convertToMeasureUnit;
     cout<<"Please enter value for conversion"<<endl;
     cin>>newConversion.userEnteredValue;
     
-    newVolume = newConversion.userEnteredValue *  
+    newValue = newConversion.userEnteredValue *  
             genericUnitMetrics[3].genericUnits[newConversion.initialMeasureUnit-1].genericUnitValue / 
             genericUnitMetrics[3].genericUnits[newConversion.convertToMeasureUnit-1].genericUnitValue ;
             
     cout<<"You converted " 
             << newConversion.userEnteredValue 
-            << genericUnitMetrics[3].genericUnits[newConversion.initialMeasureUnit-1].genericUnitName
+            << genericUnitMetrics[3].genericUnits[newConversion.initialMeasureUnit].genericUnitName
             << " to "
-            << newVolume
-            << genericUnitMetrics[3].genericUnits[newConversion.convertToMeasureUnit-1].genericUnitName
+            << newValue
+            << genericUnitMetrics[3].genericUnits[newConversion.convertToMeasureUnit].genericUnitName
             <<endl;
+     
 }
 
 
@@ -271,8 +271,13 @@ void loadConversionValuesInMl() {
 
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 11; j++) {
-          infile >> conversionValues[i][j];
-          //cout<<conversionValues[i][j]<<endl;
+            double value;
+            infile >> value;
+            
+            if(value==-1){break;}
+             conversionValues[i][j]=value;
+           //  cout<<conversionValues[i][j]<<endl;
+          
         }
     }
     infile.close();
@@ -284,10 +289,15 @@ void loadConversionUnits() {
         cout << "Cannot open file.\n";
         return;
     }
-
+    
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 11; j++) {
-          infile >> conversionUnits[i][j];
+            string line;
+            infile >> line;
+            if( line == "."){
+                break;
+            }
+            else conversionUnits[i][j]=line;
           //cout<<conversionUnits[i][j]<<endl;
         }
     }

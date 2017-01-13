@@ -56,7 +56,7 @@ void convertVolume();
 void setupMassUnitsStruct();
 void setupVolumeUnitsStruct();
 
-void convertGenericUnit();
+void convertGenericUnit(int);
 
 void reconvertVolume(struct toConvert);
 
