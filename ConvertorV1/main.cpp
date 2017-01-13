@@ -32,8 +32,8 @@ volumeUnit volumeUnits[11];
 genericUnitMetric genericUnitMetrics[11];
 
 string conversionOptions[11]={"Length", "Area", "Volume", "Time", "Speed", "Temperature","Mass", "Energy", "Pressure", "Density", "Fuel consumption level"};
-double conversionValues[4][11];
-string conversionUnits[3][11];
+double conversionValues[8][11];
+string conversionUnits[8][11];
 int answer;
 
 int main() {
@@ -54,7 +54,7 @@ int main() {
  
 int displayMainMenu() {
     
-    int answer;
+    //int answer;
     
     cout << "Step1: Choose what measurements units you want to convert from the below list: " << endl;
     cout << "Enter the number corresponding your choice (eg: '1' if you want to select '1. Length'\n";
@@ -72,164 +72,33 @@ int displayMainMenu() {
     cout<< "12. Exit";
     
     cin>> answer;
-        switch (answer){
-            case 1:
-                cout << "1.Length options:\n";
-                cout << "1. m || 2. km || 3. mile";
-                break;
-            case 2:
-                cout << "2.Area\n";
-                displayAreaOptions();
-                break;
-            case 3:
-                cout << "3.Volume\n";
-                //setupGenericUnitsStruct();
-                convertGenericUnit(answer);
-               // convertVolume();
-                break;
-            case 4:
-                cout << "4.Time formats \n";
-                break;
-            case 5:
-                cout << "5. Speed (km /h in mph in m/s)\n";
-                break;
-            case 6:
-                cout << "6. Temperature (Fahrenheit to Celsius to Kelvin)\n";
-                displayTemperatureOptions();
-                break;
-            case 7:
-                cout << "7. Mass (grams to kg to lbs to stones. you name it)\n";
-                convertMass();
-                break;
-            case 8:
-                cout << "8. Energy \n";
-                break;
-            case 9:
-                cout << "9. Pressure (bar to psi)\n";
-                break;
-            case 10:
-                cout << "10. Density \n";
-                break;
-            case 11:
-                cout << "11. Fuel consumption level (din l/100km in mile la galon si km la litru)\n";
-                break;
-            case 12:
-                cout<< "Exit -12";
-                return 0;
-            default:
-                cout << "Please pick a number from the options above, thanks!";
-        }
-        return 1;
-} 
-
-void displayAreaOptions() {
-    cout<<"U so void";
-}
-void displayTemperatureOptions() {
-    int from, to;
-    cout << "6. Temperature options (in degrees):\n";
-        cout << "1. Celsius || 2. Fahrenheit|| 3. Kelvin";
-        cout<< "Enter what you are converting from and to \n ";
-        cout<< "eg: first option number represent FROM. second option number represents TO. eg: 1 3 will convert from F to K\n ";
-        cout<< "from:";
-        cin>>from;
-        cout<<"to:";
-        cin>>to;
-        convertTemperature(from, to);
-}
-
-void convertMass() {
-    int from, to;
-    double mass, newMass;
-    cout<<"1. mg || 2. g || 3. kg || 4.tone || 5. lb || 6. oz || 7. slug \n";
-       cin>>from>>to;
-    cout<<"Enter value:\n";
-    cin>>mass;
-    setupMassUnitsStruct();
-    newMass=mass *  massUnits[from-1].massValue / massUnits[to-1].massValue;
-    cout<<"You converted "<<mass<<massUnits[from-1].massUnitName<< "to "<< newMass <<massUnits[to-1].massUnitName<< "\n";
-}
-
-void convertTemperature(int from, int to) {
-    double degrees;
-    cout<<"Please enter value you want to convert";
-    cin>>degrees;
-    if(from==1)
-        if(to==1)cout<<degrees<<" hey, you just converted a bunch!";
-        else 
-            if (to==2) {
-                degrees*=33.8;
-                cout<< degrees <<"F\n";
-                
-            }
-
-}
-void convertVolume(){
-    double newVolume;
-    toConvert volume;
-    cout<<"1.ml, 2.cm3, 3.cl, 4.in3, 5.dl, 6.l, 7.dm3, 8.ft3, 9.gal(us), 10.gal(uk), 11.m3" ;
-    
-    cout<<"Please enter FROM and TO units you want to convert"<<endl;
-    cin>>volume.initialMeasureUnit>>volume.convertToMeasureUnit;
-    cout<<"Please enter value for conversion"<<endl;
-    cin>>volume.userEnteredValue;
- 
-    
-    newVolume = volume.userEnteredValue *  
-            volumeUnits[volume.initialMeasureUnit-1].volumeValue / 
-            volumeUnits[volume.convertToMeasureUnit-1].volumeValue;
-            
-    cout<<"You converted " 
-            << volume.userEnteredValue 
-            << volumeUnits[volume.initialMeasureUnit-1].volumeUnitName 
-            << " to "
-            << newVolume <<volumeUnits[volume.convertToMeasureUnit-1].volumeUnitName
-            <<endl;
-    
-    
-    bool reconvert;
-    cout<<"Do you want to reconvert this value? 1.Yes 0.No";
-    cin>>reconvert;
-    if(reconvert) {
-        volume.userEnteredValue=newVolume;
-        volume.initialMeasureUnit=volume.convertToMeasureUnit;
-        reconvertVolume(volume);
-    }
-}
-
-void reconvertVolume(toConvert volume){
-    cout<<" Please enter to what unit you want to convert again";
-    cin>> volume.convertToMeasureUnit;
-    double newVolume = volume.userEnteredValue *  volumeUnits[volume.initialMeasureUnit-1].volumeValue / volumeUnits[volume.convertToMeasureUnit-1].volumeValue;
-    cout<<"Now converted" << volume.userEnteredValue <<volumeUnits[volume.initialMeasureUnit-1].volumeUnitName<<
-            " to "<<newVolume<<volumeUnits[volume.convertToMeasureUnit-1].volumeUnitName<< endl;
-    
+    if (answer==12) return 0;
+    else
+        convertGenericUnit(answer);
+    return 1;
 }
    
 void convertGenericUnit(int answer){
     double newValue;
     toConvert newConversion;
-    //for(int i=1; i<4; i++){
-        //if(i==answer){
             cout<< genericUnitMetrics[answer-1].genericUnitMetricIndex<<".";
             cout<< genericUnitMetrics[answer-1].genericUnitMetricName<<endl;
-       // }s
-   // }
-            for(int j=0; j<11; j++){         
-               cout<< genericUnitMetrics[answer-1].genericUnits[j].genericUnitIndex 
-                << "."<< genericUnitMetrics[answer-1].genericUnits[j].genericUnitName<<endl;
-            }
+            
+    for(int j=0; j<11; j++){         
+       cout<< genericUnitMetrics[answer-1].genericUnits[j].genericUnitIndex 
+        << "."<< genericUnitMetrics[answer-1].genericUnits[j].genericUnitName<<endl;
+    }
             
     cout<<"Please enter FROM and TO units you want to convert"<<endl;
     cin>>newConversion.initialMeasureUnit>>newConversion.convertToMeasureUnit;
     cout<<"Please enter value for conversion"<<endl;
     cin>>newConversion.userEnteredValue;
     
-    cout<<"entered initial measure unit"<<newConversion.initialMeasureUnit<<endl;
-    cout<<"entered initial measure unit"<<newConversion.convertToMeasureUnit<<endl;
+    //cout<<"entered initial measure unit"<<newConversion.initialMeasureUnit<<endl;
+    //cout<<"entered initial measure unit"<<newConversion.convertToMeasureUnit<<endl;
     
-    cout<<"initial  measurement unit value: "<<genericUnitMetrics[answer-1].genericUnits[newConversion.initialMeasureUnit].genericUnitValue<<endl;
-    cout<<"convert to measure value: "<< genericUnitMetrics[answer-1].genericUnits[newConversion.convertToMeasureUnit].genericUnitValue<<endl;
+    //cout<<"initial  measurement unit value: "<<genericUnitMetrics[answer-1].genericUnits[newConversion.initialMeasureUnit].genericUnitValue<<endl;
+    //cout<<"convert to measure value: "<< genericUnitMetrics[answer-1].genericUnits[newConversion.convertToMeasureUnit].genericUnitValue<<endl;
     
     newValue = newConversion.userEnteredValue *  
             genericUnitMetrics[answer-1].genericUnits[newConversion.initialMeasureUnit].genericUnitValue / 
@@ -250,7 +119,7 @@ void setupGenericUnitsStruct(){
     cout.precision(17);
     cout<<"Now creating generic units struct"<<endl;;
    
-    for(int i=0; i<3; i++){
+    for(int i=0; i<8; i++){
         genericUnitMetrics[i].genericUnitMetricIndex=i;
         genericUnitMetrics[i].genericUnitMetricName= conversionOptions[i];
         cout<<genericUnitMetrics[i].genericUnitMetricIndex<< "." << genericUnitMetrics[i].genericUnitMetricName<<endl;
@@ -276,7 +145,7 @@ void loadConversionValuesInMl() {
         return;
     }
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 11; j++) {
             double value;
             infile >> value;
@@ -297,7 +166,7 @@ void loadConversionUnits() {
         return;
     }
     
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 11; j++) {
             string line;
             infile >> line;

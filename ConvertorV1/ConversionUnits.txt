@@ -2,6 +2,12 @@ mm cm in ft yd m km mi nmi .
 mm2 cm2 in2 ft2 yd2 m2 a ac .
 ml cm3 cl in3 dl l dm3 ft3 gal(us) gal(uk) m3 .
 s m h day week month year .
+ft/h fph cm/min m/h ft/min cm/s m/min in/s ips km/h ft/min .
+R K F C .
+Mg g oz (A) oz (Troy) lb kg slug t .
+dyn N lbf kgf kp .
+Pa mmca mmce mmH2O mmWC mmWs lbf/ft2 mbar mmHg torr inH2O .
+
 
 
 

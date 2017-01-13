@@ -11,13 +11,30 @@ Time
 s m h day week month year
 1 60 360 3600 86400 2592000 31104000
 Speed
-
+ft/h fph cm/min m/h ft/min cm/s m/min in/s ips km/h ft/min 
+1 1 1.96 3.28 59.99 118.10 196.84 299.99 299.99 3280.82 3599.98 
 Temperature
+R K F C
+1 1.80 460.67 493.47
 
 Mass
+Mg g oz (A) oz (Troy) lb kg slug t
+1 1000 28349.5 31103.5 453592 1000000 14593903 1000000000
 
 Energy
+dyn N lbf kgf kp 
+1 99999.99 444822.16 980000 980000
+
 Pressure 
+Pa mmca mmce mmH2O mmWC mmWs lbf/ft2 mbar mmHg torr inH2O
+1 9.8 9.8 9.8 9.8 9.8 47.88 98 133.32 133.32 248.84
+
 Density
+mg/m3 g/m3 mg/l g/l kg/m3 mg/cm3 oz(Av)/ft3 oz(A)/gal(UK) oz(AV)/gal(US) lb/ft3 lb/gal(UK)
+1 1000 1000 1000000 1000000 1000000 1001153.96 6236023.29 7489150.09 16017940.09 99776372.66
+
+
 Fuel consumption level
+gallons(uk)/100km gallons(US)/100km gallons(UK)/100miles gallons(US)/100miles l/100km l/100miles
+1 1.20 1.60 1.93 4.54 7.3 
 
