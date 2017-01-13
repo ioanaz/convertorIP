@@ -13,21 +13,26 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <sstream>
 #include "conversionBase.h"
 
-using namespace std;
 
-static double long MassConvValues[8]={0, 1, 1000, 1000000, 1000000000, 453592, 28349.5, 14593903};
+
 int answer;
+massUnit massUnits[7];
 
 int main() {
     cout << "Welcome to Convertor V1 @1992 Style: " << endl;
-    displayMainMenu();
-   
+    int shouldContinue=1;
+    while(shouldContinue==1){
+        shouldContinue=displayMainMenu();
+    }
+  
     
 }
 
-void displayMainMenu() {
+int displayMainMenu() {
+    
     int answer;
     
     cout << "Step1: Choose what measurements units you want to convert from the below list: " << endl;
@@ -43,6 +48,7 @@ void displayMainMenu() {
     cout << "9. Pressure (bar to psi)\n";
     cout << "10. Density \n";
     cout << "11. Fuel consumption level (din l/100km in mile la galon si km la litru)\n";
+    cout<< "12. Exit";
     
     cin>> answer;
         switch (answer)
@@ -70,7 +76,7 @@ void displayMainMenu() {
                 break;
             case 7:
                 cout << "7. Mass (grams to kg to lbs to stones. you name it)\n";
-                displayMassOptions();
+                convertMass();
                 break;
             case 8:
                 cout << "8. Energy \n";
@@ -84,10 +90,14 @@ void displayMainMenu() {
             case 11:
                 cout << "11. Fuel consumption level (din l/100km in mile la galon si km la litru)\n";
                 break;
+            case 12:
+                cout<< "Exit -12";
+                return 0;
             default:
                 cout << "Please pick a number from the options above, thanks!";
         }
         cout << "You picked option "<< answer;
+        return 1;
 } 
 
 void displayAreaOptions() {
@@ -106,16 +116,19 @@ void displayTemperatureOptions() {
         convertTemperature(from, to);
 }
 
-void displayMassOptions(){
+void convertMass() {
     int from, to;
     double mass, newMass;
     cout<<"1. mg || 2. g || 3. kg || 4.tone || 5. lb || 6. oz || 7. slug \n";
-    cin>>from>>to;
+       cin>>from>>to;
     cout<<"Enter value:\n";
     cin>>mass;
-    newMass=mass*MassConvValues[from]/MassConvValues[to];
-    cout<<"You converted "<<mass<< "to "<< newMass << "\n";
+    setupMassUnitsArray();
+    newMass=mass *  massUnits[from-1].massValue / massUnits[to-1].massValue;
+    cout<<"You converted "<<mass<<massUnits[from-1].massUnitName<< "to "<< newMass <<massUnits[to-1].massUnitName<< "\n";
 }
+
+
 
 void convertTemperature(int from, int to) {
     double degrees;
