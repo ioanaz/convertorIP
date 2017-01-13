@@ -23,17 +23,7 @@ struct toConvert{
     int convertToMeasureUnit;
 };
 
-extern struct massUnit {
-    string massUnitName;
-    int massIndex;
-    double massValue;
-}massUnits[7];
 
-extern struct volumeUnit {
-    string volumeUnitName;
-    int volumeIndex;
-    double volumeValue;
-}volumeUnits[11];
 
 struct genericUnitMetric{
     int genericUnitMetricIndex;
@@ -50,20 +40,12 @@ void loadConversionUnits();
 void setupGenericUnitsStruct();
 
 int displayMainMenu();
-void convertMass();
-void convertVolume();
-
-void setupMassUnitsStruct();
-void setupVolumeUnitsStruct();
+;
 
 void convertGenericUnit(int);
 
 void reconvertVolume(struct toConvert);
 
-void displayAreaOptions();
-void displayMassOptions();
-void displayTemperatureOptions();
-void convertTemperature(int from, int to);
 
 #endif /* CONVERSIONBASE_H */
 

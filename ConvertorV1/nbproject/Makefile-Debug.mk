@@ -35,8 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/setupUnitsStructures.o
+	${OBJECTDIR}/main.o
 
 
 # C Compiler Flags
@@ -67,11 +66,6 @@ ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
-
-${OBJECTDIR}/setupUnitsStructures.o: setupUnitsStructures.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/setupUnitsStructures.o setupUnitsStructures.cpp
 
 # Subprojects
 .build-subprojects:
