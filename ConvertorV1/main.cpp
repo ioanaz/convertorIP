@@ -14,13 +14,23 @@
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
+#include <limits>
 #include "conversionBase.h"
 
+#ifndef NOLOGGING
+#define LOG(msg)
+#else
+#define LOG(msg) std::cout << "[LOG] (" __FILE__ ":" << __LINE__ << ") from " << __func__ << "()\n    " << msg << "\n";
+#endif
+
+typedef std::numeric_limits< double > dbl;
+//cout.precision(dbl::max_digits10);
 
 
-int answer;
+
 massUnit massUnits[7];
 volumeUnit volumeUnits[11];
+genericUnitMetric genericUnitMetrics[11];
 
 int main() {
     cout << "Welcome to Convertor V1 @1992 Style: " << endl;
@@ -28,6 +38,7 @@ int main() {
     while(shouldContinue==1){
         shouldContinue=displayMainMenu();
     }
+    
     
 }
 
@@ -63,7 +74,8 @@ int displayMainMenu() {
                 break;
             case 3:
                 cout << "3.Volume\n";
-                convertVolume();
+                setupGenericUnitsStruct();
+               // convertVolume();
                 break;
             case 4:
                 cout << "4.Time formats \n";
@@ -129,8 +141,6 @@ void convertMass() {
     cout<<"You converted "<<mass<<massUnits[from-1].massUnitName<< "to "<< newMass <<massUnits[to-1].massUnitName<< "\n";
 }
 
-
-
 void convertTemperature(int from, int to) {
     double degrees;
     cout<<"Please enter value you want to convert";
@@ -156,9 +166,18 @@ void convertVolume(){
     cin>>volume.userEnteredValue;
     
     setupVolumeUnitsStruct();
-    newVolume = volume.userEnteredValue *  volumeUnits[volume.initialMeasureUnit-1].volumeValue / volumeUnits[volume.convertToMeasureUnit-1].volumeValue;
-    cout<<"You converted " << volume.userEnteredValue << volumeUnits[volume.initialMeasureUnit-1].volumeUnitName 
-            << " to "<< newVolume <<volumeUnits[volume.convertToMeasureUnit-1].volumeUnitName<<endl;
+    newVolume = volume.userEnteredValue *  
+            volumeUnits[volume.initialMeasureUnit-1].volumeValue / 
+            volumeUnits[volume.convertToMeasureUnit-1].volumeValue;
+            
+    cout<<"You converted " 
+            << volume.userEnteredValue 
+            << volumeUnits[volume.initialMeasureUnit-1].volumeUnitName 
+            << " to "
+            << newVolume <<volumeUnits[volume.convertToMeasureUnit-1].volumeUnitName
+            <<endl;
+    
+    
     bool reconvert;
     cout<<"Do you want to reconvert this value? 1.Yes 0.No";
     cin>>reconvert;
@@ -175,5 +194,52 @@ void reconvertVolume(toConvert volume){
     double newVolume = volume.userEnteredValue *  volumeUnits[volume.initialMeasureUnit-1].volumeValue / volumeUnits[volume.convertToMeasureUnit-1].volumeValue;
     cout<<"Now converted" << volume.userEnteredValue <<volumeUnits[volume.initialMeasureUnit-1].volumeUnitName<<
             " to "<<newVolume<<volumeUnits[volume.convertToMeasureUnit-1].volumeUnitName<< endl;
+    
+}
+/*
+void convertGeneric(genericUnitMetric newUnitMetric){
+    double newConversion;
+    if(newUnitMetric.genericUnitMetricIndex==3) {
+       cout<<"1.ml, 2.cm3, 3.cl, 4.in3, 5.dl, 6.l, 7.dm3, 8.ft3, 9.gal(us), 10.gal(uk), 11.m3" ;
+       toConvert volume;
+       cin>>volume.initialMeasureUnit>>volume.convertToMeasureUnit;
+       cin>>volume.userEnteredValue;
+       setupVolumeUnitsStruct();
+    }
+   
+}
+*/
+
+
+void setupGenericUnitsStruct(){
+   // genericUnitMetric genericUnitMetric[11];
+    cout.precision(17);
+    cout<<" Intrat in generic units struct";
+    double volumeConvValues[11]={1, 1, 10, 16.387, 100, 1000, 1000, 28320, 3785, 4546, 1000000};
+        string volumeUnitsNames[11]={"ml", "cm3", "cl", "in3", "dl", "l", "dm3", "ft3", "gal(us)", "gal(uk)", "m3" };
+    
+    for(int i=0; i<11; i++){
+      //  genericUnitMetrics[i]=new genericUnitMetric(genericUnitMetricIndex[i]);
+        
+        if(i>2){
+        for(int j=0; j<11; j++){
+            
+             
+                genericUnitMetrics[i].genericUnits[j].genericUnitIndex=j;
+                genericUnitMetrics[i].genericUnits[j].genericUnitName=volumeUnitsNames[j];
+                genericUnitMetrics[i].genericUnits[j].genericUnitValue=volumeConvValues[j];
+                cout<<"i="<<i<<endl;
+           
+                cout << genericUnitMetrics[i].genericUnits[j].genericUnitIndex 
+                        << " || "<< genericUnitMetrics[i].genericUnits[j].genericUnitName
+                        << " || "<< genericUnitMetrics[i].genericUnits[j].genericUnitValue
+                        <<endl;
+                cout<<"j="<<j<<endl;
+                
+            }
+         
+        }
+    }
+    
     
 }
