@@ -32,7 +32,7 @@ struct genericUnitMetric{
         int genericUnitIndex;
         string genericUnitName;
         double genericUnitValue;
-    }genericUnits[11];
+    }genericUnits[12];
 };
 
 void loadConversionValuesInMl();

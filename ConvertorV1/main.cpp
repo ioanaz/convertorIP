@@ -27,13 +27,11 @@
 
 typedef std::numeric_limits< double > dbl;
 
-//massUnit massUnits[7];
-//volumeUnit volumeUnits[11];
 genericUnitMetric genericUnitMetrics[12];
 
 string conversionOptions[11]={"Length", "Area", "Volume", "Time", "Speed", "Temperature","Mass", "Energy", "Pressure", "Density", "Fuel consumption level"};
-double conversionValues[9][12];
-string conversionUnits[9][12];
+double conversionValues[11][12];
+string conversionUnits[11][12];
 int answer;
 
 int main() {
@@ -48,15 +46,10 @@ int main() {
         shouldContinue=displayMainMenu();
     }
     
-
-    
 }
  
 int displayMainMenu() {
-    
-    int answer;
-    
-    cout << "Step1: Choose what measurements units you want to convert from the below list: " << endl;
+      
     cout << "Enter the number corresponding your choice (eg: '1' if you want to select '1. Length'\n";
     cout << "1.Length\n";
     cout << "2.Area\n";
@@ -78,50 +71,6 @@ int displayMainMenu() {
        
     return 1;
 } 
-/*
-void convertVolume(){
-    double newVolume;
-    toConvert volume;
-    cout<<"1.ml, 2.cm3, 3.cl, 4.in3, 5.dl, 6.l, 7.dm3, 8.ft3, 9.gal(us), 10.gal(uk), 11.m3" ;
-    
-    cout<<"Please enter FROM and TO units you want to convert"<<endl;
-    cin>>volume.initialMeasureUnit>>volume.convertToMeasureUnit;
-    cout<<"Please enter value for conversion"<<endl;
-    cin>>volume.userEnteredValue;
- 
-    
-    newVolume = volume.userEnteredValue *  
-            volumeUnits[volume.initialMeasureUnit-1].volumeValue / 
-            volumeUnits[volume.convertToMeasureUnit-1].volumeValue;
-            
-    cout<<"You converted " 
-            << volume.userEnteredValue 
-            << volumeUnits[volume.initialMeasureUnit-1].volumeUnitName 
-            << " to "
-            << newVolume <<volumeUnits[volume.convertToMeasureUnit-1].volumeUnitName
-            <<endl;
-    
-    
-    bool reconvert;
-    cout<<"Do you want to reconvert this value? 1.Yes 0.No";
-    cin>>reconvert;
-    if(reconvert) {
-        volume.userEnteredValue=newVolume;
-        volume.initialMeasureUnit=volume.convertToMeasureUnit;
-        reconvertVolume(volume);
-    }
-}
-*/
-/*
-void reconvertVolume(toConvert volume){
-    cout<<" Please enter to what unit you want to convert again";
-    cin>> volume.convertToMeasureUnit;
-    double newVolume = volume.userEnteredValue *  volumeUnits[volume.initialMeasureUnit-1].volumeValue / volumeUnits[volume.convertToMeasureUnit-1].volumeValue;
-    cout<<"Now converted" << volume.userEnteredValue <<volumeUnits[volume.initialMeasureUnit-1].volumeUnitName<<
-            " to "<<newVolume<<volumeUnits[volume.convertToMeasureUnit-1].volumeUnitName<< endl;
-    
-}
- */
    
 void convertGenericUnit(int answer){
     double newValue;
@@ -151,9 +100,11 @@ void convertGenericUnit(int answer){
             
     cout<<"You converted " 
             << newConversion.userEnteredValue 
+            << " "
             << genericUnitMetrics[answer-1].genericUnits[newConversion.initialMeasureUnit].genericUnitName
             << " to "
             << newValue
+            << " "
             << genericUnitMetrics[answer-1].genericUnits[newConversion.convertToMeasureUnit].genericUnitName
             <<endl;
      
@@ -164,7 +115,7 @@ void setupGenericUnitsStruct(){
     cout.precision(17);
     cout<<"Now creating generic units struct"<<endl;;
    
-    for(int i=0; i<9; i++){
+    for(int i=0; i<11; i++){
         genericUnitMetrics[i].genericUnitMetricIndex=i;
         genericUnitMetrics[i].genericUnitMetricName= conversionOptions[i];
         cout<<genericUnitMetrics[i].genericUnitMetricIndex<< "." << genericUnitMetrics[i].genericUnitMetricName<<endl;
@@ -190,7 +141,7 @@ void loadConversionValuesInMl() {
         return;
     }
 
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < 11; i++) {
         for (int j = 0; j < 12; j++) {
             double value;
             infile >> value;
@@ -211,7 +162,7 @@ void loadConversionUnits() {
         return;
     }
     
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < 11; i++) {
         for (int j = 0; j < 12; j++) {
             string line;
             infile >> line;

@@ -7,6 +7,8 @@ R K F C .
 Mg g oz (A) oz (Troy) lb kg slug t .
 dyn N lbf kgf kp .
 Pa mmca mmce mmH2O mmWC mmWs lbf/ft2 mbar mmHg torr inH2O .
+mg/m3 g/m3 mg/l g/l kg/m3 mg/cm3 oz(Av)/ft3 oz(A)/gal(UK) oz(AV)/gal(US) lb/ft3 lb/gal(UK) .
+gallons(uk)/100km gallons(US)/100km gallons(UK)/100miles gallons(US)/100miles l/100km l/100miles .
 .
 
 
