@@ -20,6 +20,7 @@
 
 int answer;
 massUnit massUnits[7];
+volumeUnit volumeUnits[11];
 
 int main() {
     cout << "Welcome to Convertor V1 @1992 Style: " << endl;
@@ -27,7 +28,6 @@ int main() {
     while(shouldContinue==1){
         shouldContinue=displayMainMenu();
     }
-  
     
 }
 
@@ -63,6 +63,7 @@ int displayMainMenu() {
                 break;
             case 3:
                 cout << "3.Volume\n";
+                convertVolume();
                 break;
             case 4:
                 cout << "4.Time formats \n";
@@ -123,7 +124,7 @@ void convertMass() {
        cin>>from>>to;
     cout<<"Enter value:\n";
     cin>>mass;
-    setupMassUnitsArray();
+    setupMassUnitsStruct();
     newMass=mass *  massUnits[from-1].massValue / massUnits[to-1].massValue;
     cout<<"You converted "<<mass<<massUnits[from-1].massUnitName<< "to "<< newMass <<massUnits[to-1].massUnitName<< "\n";
 }
@@ -144,3 +145,4 @@ void convertTemperature(int from, int to) {
             }
 
 }
+void convertVolume(){}

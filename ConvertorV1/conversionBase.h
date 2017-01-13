@@ -30,13 +30,23 @@ extern struct massUnit {
     double massValue;
 }massUnits[7];
 
-void convertMass();
+extern struct volumeUnit {
+    string volumeUnitName;
+    int volumeIndex;
+    double volumeValue;
+}volumeUnits[11];
+
+
 int displayMainMenu();
+void convertMass();
+void convertVolume();
+void setupMassUnitsStruct();
+
 void displayAreaOptions();
 void displayMassOptions();
 void displayTemperatureOptions();
 void convertTemperature(int from, int to);
-void setupMassUnitsArray();
+
 
 
 #endif /* CONVERSIONBASE_H */
