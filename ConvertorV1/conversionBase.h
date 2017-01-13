@@ -45,13 +45,18 @@ struct genericUnitMetric{
     }genericUnits[11];
 };
 
+void loadConversionValuesInMl();
+void loadConversionUnits();
+void setupGenericUnitsStruct();
 
 int displayMainMenu();
 void convertMass();
 void convertVolume();
+
 void setupMassUnitsStruct();
 void setupVolumeUnitsStruct();
-void setupGenericUnitsStruct();
+
+void convertGenericUnit();
 
 void reconvertVolume(struct toConvert);
 
@@ -59,8 +64,6 @@ void displayAreaOptions();
 void displayMassOptions();
 void displayTemperatureOptions();
 void convertTemperature(int from, int to);
-
-
 
 #endif /* CONVERSIONBASE_H */
 

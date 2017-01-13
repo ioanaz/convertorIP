@@ -15,6 +15,7 @@
 #include <iostream>
 #include <sstream>
 #include <limits>
+#include <fstream>
 #include "conversionBase.h"
 
 #ifndef NOLOGGING
@@ -24,24 +25,28 @@
 #endif
 
 typedef std::numeric_limits< double > dbl;
-//cout.precision(dbl::max_digits10);
-
-
 
 massUnit massUnits[7];
 volumeUnit volumeUnits[11];
 genericUnitMetric genericUnitMetrics[11];
 
+string conversionOptions[11]={"Length", "Area", "Volume", "Time", "Speed", "Temperature","Mass", "Energy", "Pressure", "Density", "Fuel consumption level"};
+double conversionValues[4][11];
+string conversionUnits[3][11];
+
 int main() {
     cout << "Welcome to Convertor V1 @1992 Style: " << endl;
     int shouldContinue=1;
-    while(shouldContinue==1){
+   /* while(shouldContinue==1){
         shouldContinue=displayMainMenu();
     }
-    
+    */
+    loadConversionValuesInMl();
+    loadConversionUnits();
+    setupGenericUnitsStruct();
     
 }
-
+ 
 int displayMainMenu() {
     
     int answer;
@@ -75,6 +80,7 @@ int displayMainMenu() {
             case 3:
                 cout << "3.Volume\n";
                 setupGenericUnitsStruct();
+                convertGenericUnit();
                // convertVolume();
                 break;
             case 4:
@@ -109,7 +115,6 @@ int displayMainMenu() {
             default:
                 cout << "Please pick a number from the options above, thanks!";
         }
-        cout << "You picked option "<< answer;
         return 1;
 } 
 
@@ -209,37 +214,82 @@ void convertGeneric(genericUnitMetric newUnitMetric){
    
 }
 */
+ 
+   
+void convertGenericUnit(){
+    double newVolume;
+    toConvert newConversion;
+    cout<<"1.ml, 2.cm3, 3.cl, 4.in3, 5.dl, 6.l, 7.dm3, 8.ft3, 9.gal(us), 10.gal(uk), 11.m3" ;
+    cout<<"Please enter FROM and TO units you want to convert"<<endl;
+    cin>>newConversion.initialMeasureUnit>>newConversion.convertToMeasureUnit;
+    cout<<"Please enter value for conversion"<<endl;
+    cin>>newConversion.userEnteredValue;
+    
+    newVolume = newConversion.userEnteredValue *  
+            genericUnitMetrics[3].genericUnits[newConversion.initialMeasureUnit-1].genericUnitValue / 
+            genericUnitMetrics[3].genericUnits[newConversion.convertToMeasureUnit-1].genericUnitValue ;
+            
+    cout<<"You converted " 
+            << newConversion.userEnteredValue 
+            << genericUnitMetrics[3].genericUnits[newConversion.initialMeasureUnit-1].genericUnitName
+            << " to "
+            << newVolume
+            << genericUnitMetrics[3].genericUnits[newConversion.convertToMeasureUnit-1].genericUnitName
+            <<endl;
+}
 
 
 void setupGenericUnitsStruct(){
-   // genericUnitMetric genericUnitMetric[11];
     cout.precision(17);
-    cout<<" Intrat in generic units struct";
-    double volumeConvValues[11]={1, 1, 10, 16.387, 100, 1000, 1000, 28320, 3785, 4546, 1000000};
-        string volumeUnitsNames[11]={"ml", "cm3", "cl", "in3", "dl", "l", "dm3", "ft3", "gal(us)", "gal(uk)", "m3" };
-    
-    for(int i=0; i<11; i++){
-      //  genericUnitMetrics[i]=new genericUnitMetric(genericUnitMetricIndex[i]);
+    cout<<"Now creating generic units struct"<<endl;;
+   
+    for(int i=0; i<3; i++){
+        genericUnitMetrics[i].genericUnitMetricIndex=i;
+        genericUnitMetrics[i].genericUnitMetricName= conversionOptions[i];
+        cout<<genericUnitMetrics[i].genericUnitMetricIndex<< "." << genericUnitMetrics[i].genericUnitMetricName<<endl;
         
-        if(i>2){
-        for(int j=0; j<11; j++){
-            
-             
+        for(int j=0; j<11; j++){         
                 genericUnitMetrics[i].genericUnits[j].genericUnitIndex=j;
-                genericUnitMetrics[i].genericUnits[j].genericUnitName=volumeUnitsNames[j];
-                genericUnitMetrics[i].genericUnits[j].genericUnitValue=volumeConvValues[j];
-                cout<<"i="<<i<<endl;
+                genericUnitMetrics[i].genericUnits[j].genericUnitName=conversionUnits[i][j];
+                genericUnitMetrics[i].genericUnits[j].genericUnitValue=conversionValues[i][j];
            
-                cout << genericUnitMetrics[i].genericUnits[j].genericUnitIndex 
-                        << " || "<< genericUnitMetrics[i].genericUnits[j].genericUnitName
-                        << " || "<< genericUnitMetrics[i].genericUnits[j].genericUnitValue
-                        <<endl;
-                cout<<"j="<<j<<endl;
-                
+                cout<<genericUnitMetrics[i].genericUnits[j].genericUnitIndex 
+                << " || "<< genericUnitMetrics[i].genericUnits[j].genericUnitName
+                << " || "<< genericUnitMetrics[i].genericUnits[j].genericUnitValue;  
             }
-         
+        cout<<endl;
         }
     }
-    
-    
+
+void loadConversionValuesInMl() {
+    cout.precision(10);
+    ifstream infile("ConversionValuesInML.txt");
+    if (!infile) {
+        cout << "Cannot open file.\n";
+        return;
+    }
+
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 11; j++) {
+          infile >> conversionValues[i][j];
+          //cout<<conversionValues[i][j]<<endl;
+        }
+    }
+    infile.close();
+}
+
+void loadConversionUnits() { 
+    ifstream infile("ConversionUnits.txt");
+    if (!infile) {
+        cout << "Cannot open file.\n";
+        return;
+    }
+
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 11; j++) {
+          infile >> conversionUnits[i][j];
+          //cout<<conversionUnits[i][j]<<endl;
+        }
+    }
+    infile.close();
 }

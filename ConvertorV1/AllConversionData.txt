@@ -1,0 +1,23 @@
+Length 
+mm cm in ft yd m km mi nmi
+1 10 25.4 304.8 914.4002494 1000 1000000 1609344 1852000
+Area 
+mm2 cm2 in2 ft2 yd2 m2 a ac
+1 100 645.2 92900 836127.816 1000000 100000000
+Volume
+ml cm3 cl in3 dl l dm3 ft3 gal(us) gal(uk) m3
+1 1 10 16.387 100 1000 1000 28320 3785 4546 1000000
+Time
+s m h day week month year
+1 60 360 3600 86400 2592000 31104000
+Speed
+
+Temperature
+
+Mass
+
+Energy
+Pressure 
+Density
+Fuel consumption level
+
