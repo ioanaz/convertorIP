@@ -159,4 +159,21 @@ void convertVolume(){
     newVolume = volume.userEnteredValue *  volumeUnits[volume.initialMeasureUnit-1].volumeValue / volumeUnits[volume.convertToMeasureUnit-1].volumeValue;
     cout<<"You converted " << volume.userEnteredValue << volumeUnits[volume.initialMeasureUnit-1].volumeUnitName 
             << " to "<< newVolume <<volumeUnits[volume.convertToMeasureUnit-1].volumeUnitName<<endl;
+    bool reconvert;
+    cout<<"Do you want to reconvert this value? 1.Yes 0.No";
+    cin>>reconvert;
+    if(reconvert) {
+        volume.userEnteredValue=newVolume;
+        volume.initialMeasureUnit=volume.convertToMeasureUnit;
+        reconvertVolume(volume);
+    }
+}
+
+void reconvertVolume(toConvert volume){
+    cout<<" Please enter to what unit you want to convert again";
+    cin>> volume.convertToMeasureUnit;
+    double newVolume = volume.userEnteredValue *  volumeUnits[volume.initialMeasureUnit-1].volumeValue / volumeUnits[volume.convertToMeasureUnit-1].volumeValue;
+    cout<<"Now converted" << volume.userEnteredValue <<volumeUnits[volume.initialMeasureUnit-1].volumeUnitName<<
+            " to "<<newVolume<<volumeUnits[volume.convertToMeasureUnit-1].volumeUnitName<< endl;
+    
 }

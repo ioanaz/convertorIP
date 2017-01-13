@@ -43,6 +43,8 @@ void convertVolume();
 void setupMassUnitsStruct();
 void  setupVolumeUnitsStruct();
 
+void reconvertVolume(struct toConvert);
+
 void displayAreaOptions();
 void displayMassOptions();
 void displayTemperatureOptions();
