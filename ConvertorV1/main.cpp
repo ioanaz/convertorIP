@@ -173,6 +173,7 @@ void convertVolume(){
     cin>>volume.initialMeasureUnit>>volume.convertToMeasureUnit;
     cout<<"Please enter value for conversion"<<endl;
     cin>>volume.userEnteredValue;
+ 
     
     newVolume = volume.userEnteredValue *  
             volumeUnits[volume.initialMeasureUnit-1].volumeValue / 
@@ -224,16 +225,22 @@ void convertGenericUnit(int answer){
     cout<<"Please enter value for conversion"<<endl;
     cin>>newConversion.userEnteredValue;
     
+    cout<<"entered initial measure unit"<<newConversion.initialMeasureUnit<<endl;
+    cout<<"entered initial measure unit"<<newConversion.convertToMeasureUnit<<endl;
+    
+    cout<<"initial  measurement unit value: "<<genericUnitMetrics[answer-1].genericUnits[newConversion.initialMeasureUnit].genericUnitValue<<endl;
+    cout<<"convert to measure value: "<< genericUnitMetrics[answer-1].genericUnits[newConversion.convertToMeasureUnit].genericUnitValue<<endl;
+    
     newValue = newConversion.userEnteredValue *  
-            genericUnitMetrics[3].genericUnits[newConversion.initialMeasureUnit-1].genericUnitValue / 
-            genericUnitMetrics[3].genericUnits[newConversion.convertToMeasureUnit-1].genericUnitValue ;
+            genericUnitMetrics[answer-1].genericUnits[newConversion.initialMeasureUnit].genericUnitValue / 
+            genericUnitMetrics[answer-1].genericUnits[newConversion.convertToMeasureUnit].genericUnitValue ;
             
     cout<<"You converted " 
             << newConversion.userEnteredValue 
-            << genericUnitMetrics[3].genericUnits[newConversion.initialMeasureUnit].genericUnitName
+            << genericUnitMetrics[answer-1].genericUnits[newConversion.initialMeasureUnit].genericUnitName
             << " to "
             << newValue
-            << genericUnitMetrics[3].genericUnits[newConversion.convertToMeasureUnit].genericUnitName
+            << genericUnitMetrics[answer-1].genericUnits[newConversion.convertToMeasureUnit].genericUnitName
             <<endl;
      
 }
