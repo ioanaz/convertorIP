@@ -41,6 +41,7 @@ int displayMainMenu();
 void convertMass();
 void convertVolume();
 void setupMassUnitsStruct();
+void  setupVolumeUnitsStruct();
 
 void displayAreaOptions();
 void displayMassOptions();

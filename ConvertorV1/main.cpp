@@ -136,7 +136,7 @@ void convertTemperature(int from, int to) {
     cout<<"Please enter value you want to convert";
     cin>>degrees;
     if(from==1)
-        if(to==1)cout<<degrees<<" hey dumbass, you just converted a bunch!";
+        if(to==1)cout<<degrees<<" hey, you just converted a bunch!";
         else 
             if (to==2) {
                 degrees*=33.8;
@@ -145,4 +145,18 @@ void convertTemperature(int from, int to) {
             }
 
 }
-void convertVolume(){}
+void convertVolume(){
+    double newVolume;
+    toConvert volume;
+    cout<<"1.ml, 2.cm3, 3.cl, 4.in3, 5.dl, 6.l, 7.dm3, 8.ft3, 9.gal(us), 10.gal(uk), 11.m3" ;
+    
+    cout<<"Please enter FROM and TO units you want to convert"<<endl;
+    cin>>volume.initialMeasureUnit>>volume.convertToMeasureUnit;
+    cout<<"Please enter value for conversion"<<endl;
+    cin>>volume.userEnteredValue;
+    
+    setupVolumeUnitsStruct();
+    newVolume = volume.userEnteredValue *  volumeUnits[volume.initialMeasureUnit-1].volumeValue / volumeUnits[volume.convertToMeasureUnit-1].volumeValue;
+    cout<<"You converted " << volume.userEnteredValue << volumeUnits[volume.initialMeasureUnit-1].volumeUnitName 
+            << " to "<< newVolume <<volumeUnits[volume.convertToMeasureUnit-1].volumeUnitName<<endl;
+}
